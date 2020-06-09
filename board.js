@@ -1,5 +1,6 @@
 class Board {
     grid;
+    piece;
 
     reset() {
         this.grid = this.getEmptyBoard();
