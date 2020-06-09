@@ -22,6 +22,11 @@ class Piece {
         this.y = 0;
     }
 
+    move (p) {
+        this.x = p.x;
+        this.y = p.y;
+    }
+
     draw() {
         this.ctx.fillStyle = this.color;
         this.shape.forEach((row, y) => {
