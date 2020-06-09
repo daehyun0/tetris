@@ -17,7 +17,7 @@ let moves = {
 function play() {
     board.reset();
     let piece = new Piece(ctx);
-    piece.draw();
+    board.piece = piece;
 
     document.addEventListener("keydown", event => {
         if (moves[event.key]) {
@@ -26,8 +26,8 @@ function play() {
             ctx.clearRect(piece.x - 1, piece.y - 1, 3 * BLOCK_SIZE, 3 * BLOCK_SIZE);
 
             let newPiece = moves[event.key](piece);
-            piece.move(newPiece);
-            piece.draw();
+            board.piece.move(newPiece);
+            board.draw();
         }
     })
 }
