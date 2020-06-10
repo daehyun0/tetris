@@ -3,6 +3,7 @@ const ROW_COUNT = 20;
 const BLOCK_SIZE = 30;
 
 const KEY = {
+    UP: "ArrowUp",
     LEFT: "ArrowLeft",
     RIGHT: "ArrowRight",
     DOWN: "ArrowDown",

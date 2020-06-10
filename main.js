@@ -27,19 +27,18 @@ function play() {
             let newPiece = moves[event.code](piece);
 
             if (board.canMovePiece(newPiece)) {
-                ctx.clearRect(piece.x - 1, piece.y - 1, 3 * BLOCK_SIZE, 3 * BLOCK_SIZE);
                 board.piece.move(newPiece);
             }
         } else if (event.code === KEY.SPACE) {
-            ctx.clearRect(piece.x - 1, piece.y - 1, 3 * BLOCK_SIZE, 3 * BLOCK_SIZE);
-
             let newPiece = moves[KEY.DOWN](piece);
             while (board.canMovePiece(newPiece)) {
                 board.piece.move(newPiece);
                 newPiece = moves[KEY.DOWN](newPiece);
             }
+        } else if (event.code === KEY.UP) {
+            piece.rotate();
         }
-
+        ctx.clearRect(piece.x - 1, piece.y - 1, 3 * BLOCK_SIZE, 3 * BLOCK_SIZE);
         board.draw();
     })
 }
