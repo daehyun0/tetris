@@ -21,16 +21,25 @@ function play() {
     board.draw();
 
     document.addEventListener("keydown", event => {
-        if (moves[event.key]) {
-            event.preventDefault();
+        event.preventDefault();
 
-            let newPiece = moves[event.key](piece);
+        if (moves[event.code]) {
+            let newPiece = moves[event.code](piece);
 
             if (board.canMovePiece(newPiece)) {
                 ctx.clearRect(piece.x - 1, piece.y - 1, 3 * BLOCK_SIZE, 3 * BLOCK_SIZE);
                 board.piece.move(newPiece);
-                board.draw();
+            }
+        } else if (event.code === KEY.SPACE) {
+            ctx.clearRect(piece.x - 1, piece.y - 1, 3 * BLOCK_SIZE, 3 * BLOCK_SIZE);
+
+            let newPiece = moves[KEY.DOWN](piece);
+            while (board.canMovePiece(newPiece)) {
+                board.piece.move(newPiece);
+                newPiece = moves[KEY.DOWN](newPiece);
             }
         }
+
+        board.draw();
     })
 }

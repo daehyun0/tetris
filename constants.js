@@ -5,6 +5,7 @@ const BLOCK_SIZE = 30;
 const KEY = {
     LEFT: "ArrowLeft",
     RIGHT: "ArrowRight",
-    DOWN: "ArrowDown"
+    DOWN: "ArrowDown",
+    SPACE: "Space"
 }
 Object.freeze(KEY);
