@@ -17,10 +17,34 @@ let moves = {
 }
 
 let keySet = [KEY.LEFT, KEY.RIGHT, KEY.UP, KEY.DOWN, KEY.SPACE];
+let time = { start: 0, elapsed: 0, level: 1000 };
+
+function animate (now = 0) {
+    if (time.start === 0) {
+        time.start = now;
+    }
+
+    time.elapsed = now - time.start;
+
+    if (time.elapsed > time.level) {
+        time.start = now;
+
+        let newPiece = moves[KEY.DOWN](piece);
+        if (board.canMovePiece(newPiece)) {
+            board.piece.move(newPiece);
+        }
+
+        ctx.clearRect(piece.x - 1, piece.y - 1, 3 * BLOCK_SIZE, 3 * BLOCK_SIZE);
+        board.draw();
+    }
+    requestAnimationFrame(animate);
+}
 
 function play() {
     board.reset();
     board.draw();
+
+    animate();
 
     document.addEventListener("keydown", event => {
         event.preventDefault();
