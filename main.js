@@ -16,12 +16,20 @@ let moves = {
     [KEY.DOWN]: piece => ({...piece, y: piece.y + 1})
 }
 
+let keySet = [KEY.LEFT, KEY.RIGHT, KEY.UP, KEY.DOWN, KEY.SPACE];
+
 function play() {
     board.reset();
     board.draw();
 
     document.addEventListener("keydown", event => {
         event.preventDefault();
+
+        if (keySet.indexOf(event.code) === -1) {
+            return;
+        }
+
+        ctx.clearRect(piece.x - 1, piece.y - 1, 3 * BLOCK_SIZE, 3 * BLOCK_SIZE);
 
         if (moves[event.code]) {
             let newPiece = moves[event.code](piece);
@@ -38,7 +46,7 @@ function play() {
         } else if (event.code === KEY.UP) {
             piece.rotate();
         }
-        ctx.clearRect(piece.x - 1, piece.y - 1, 3 * BLOCK_SIZE, 3 * BLOCK_SIZE);
+
         board.draw();
     })
 }
